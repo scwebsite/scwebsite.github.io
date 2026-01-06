@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>上城汽车商超消费券</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1E40AF',
+                        secondary: '#3B82F6',
+                        accent: '#F97316',
+                        light: '#F3F4F6',
+                        dark: '#1F2937'
+                    },
+                    fontFamily: {
+                        sans: ['PingFang SC', 'Helvetica Neue', 'Arial', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .card-shadow {
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            }
+            .gradient-bg {
+                background: linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%);
+            }
+            .btn-shadow {
+                box-shadow: 0 4px 0 0 #1E40AF;
+            }
+            .btn-active {
+                transform: translateY(4px);
+                box-shadow: 0 0 0 0 #1E40AF;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- 顶部导航栏 -->
+    <header class="gradient-bg text-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-xl md:text-2xl font-bold text-shadow">上城汽车商超消费券</h1>
+            <button id="helpBtn" class="bg-white/20 hover:bg-white/30 rounded-full p-2 transition-all">
+                <i class="fa fa-question-circle text-lg"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- 主要内容区 -->
+    <main class="container mx-auto px-4 py-6">
+        <!-- 活动时间 -->
+        <section class="bg-white rounded-xl p-6 mb-6 card-shadow">
+            <h2 class="text-xl font-bold text-primary mb-4 flex items-center">
+                <i class="fa fa-calendar mr-2"></i>活动时间
+            </h2>
+            <p class="text-gray-700 leading-relaxed">
+                2025年11月25日至2025年12月31日（以新车发票开具时间为准），活动资金消耗完毕则当即结束。
+            </p>
+        </section>
+
+        <!-- 补贴标准 -->
+        <section class="bg-white rounded-xl p-6 mb-6 card-shadow">
+            <h2 class="text-xl font-bold text-primary mb-4 flex items-center">
+                <i class="fa fa-gift mr-2"></i>补贴标准
+            </h2>
+            <div class="space-y-4">
+                <div class="bg-light rounded-lg p-4 border-l-4 border-secondary">
+                    <h3 class="font-bold text-gray-800">5万元≤车辆不含税价格&lt;10万元</h3>
+                    <p class="text-accent font-bold text-xl mt-2">3000元</p>
+                    <p class="text-gray-600 text-sm">(含1000元现金补贴+2000元消费券)</p>
+                </div>
+                <div class="bg-light rounded-lg p-4 border-l-4 border-secondary">
+                    <h3 class="font-bold text-gray-800">10万元≤车辆不含税价格&lt;20万元</h3>
+                    <p class="text-accent font-bold text-xl mt-2">5000元</p>
+                    <p class="text-gray-600 text-sm">(含2000元现金补贴+3000元消费券)</p>
+                </div>
+                <div class="bg-light rounded-lg p-4 border-l-4 border-secondary">
+                    <h3 class="font-bold text-gray-800">20万元≤车辆不含税价格&lt;30万元</h3>
+                    <p class="text-accent font-bold text-xl mt-2">8000元</p>
+                    <p class="text-gray-600 text-sm">(含4000元现金补贴+4000元消费券)</p>
+                </div>
+                <div class="bg-light rounded-lg p-4 border-l-4 border-secondary">
+                    <h3 class="font-bold text-gray-800">30万元≤车辆不含税价格</h3>
+                    <p class="text-accent font-bold text-xl mt-2">11000元</p>
+                    <p class="text-gray-600 text-sm">(含6000元现金补贴+5000元消费券)</p>
+                </div>
+            </div>
+            <p class="mt-4 text-gray-600 text-sm italic">
+                购买新车补贴资金部分，由政府对补贴情况进行审计后，根据审计结果统一兑付补贴资金，消费券通过云闪付平台发放。
+            </p>
+        </section>
+
+        <!-- 参与方式 -->
+        <section class="bg-white rounded-xl p-6 mb-6 card-shadow">
+            <h2 class="text-xl font-bold text-primary mb-4 flex items-center">
+                <i class="fa fa-handshake-o mr-2"></i>参与方式
+            </h2>
+            <div class="space-y-3 text-gray-700 leading-relaxed">
+                <p>政策期内，消费者在上城区参加活动的汽车经销企业购买新车，由车企负责帮助消费者上传相关审核信息，经系统审核后，政府将分批向云闪付提供审核通过后的白名单消费者清单，由云闪付向白名单清单对应的云闪付账户推送相应金额消费券，消费券可在指定平台（商户）内核销。</p>
+                <div class="mt-4">
+                    <button id="showCompaniesBtn" class="bg-secondary hover:bg-primary text-white font-bold py-2 px-4 rounded-lg transition-all btn-shadow active:btn-active">
+                        查看参与活动汽车企业名单
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 消费券使用说明 -->
+        <section class="bg-white rounded-xl p-6 mb-6 card-shadow">
+            <h2 class="text-xl font-bold text-primary mb-4 flex items-center">
+                <i class="fa fa-credit-card mr-2"></i>消费券使用说明
+            </h2>
+            <div class="space-y-4 text-gray-700 leading-relaxed">
+                <div class="flex">
+                    <span class="bg-primary text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0 mt-1">1</span>
+                    <p>对审核通过的消费者，云闪付将向消费者推送多张满500.01减500的消费券，可叠加使用。</p>
+                </div>
+                <div class="flex">
+                    <span class="bg-primary text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0 mt-1">2</span>
+                    <p>消费券需在指定线上平台使用。消费者可打开淘宝APP搜索"汽车商超消费券"，打开苏宁易购APP或苏宁易购微信小程序搜索"上城汽车消费券"，在指定页面购买12类家电产品以及手机、平板（含学习机）、智能手表（手环）等3C产品，通过云闪付支付核销。</p>
+                </div>
+                <div class="flex">
+                    <span class="bg-primary text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0 mt-1">3</span>
+                    <p>消费券使用期限至2026年2月28日23:59:59止，不可找零，过期作废，不再补发。</p>
+                </div>
+                <div class="flex">
+                    <span class="bg-primary text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0 mt-1">4</span>
+                    <p>使用消费券的订单全额退货时，消费者实付金额退回至账户，消费券次日返还；部分退货时，退货部分的实付金额退回至账户，消费券不予返还。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 智能问答 -->
+        <section class="bg-white rounded-xl p-6 mb-6 card-shadow">
+            <h2 class="text-xl font-bold text-primary mb-4 flex items-center">
+                <i class="fa fa-comments-o mr-2"></i>智能问答
+            </h2>
+            <div id="chatContainer" class="bg-light rounded-lg p-4 h-80 overflow-y-auto mb-4 space-y-4">
+                <div class="flex justify-start">
+                    <div class="bg-gray-200 rounded-lg py-2 px-4 max-w-[80%]">
+                        <p class="text-gray-800">您好！我是上城汽车消费券智能助手，有什么可以帮您解答的问题吗？</p>
+                    </div>
+                </div>
+            </div>
+            <div class="flex">
+                <input type="text" id="userInput" class="flex-1 border border-gray-300 rounded-l-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary" placeholder="请输入您的问题...">
+                <button id="sendBtn" class="bg-primary hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r-lg transition-all">
+                    <i class="fa fa-paper-plane"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- 常见问题 -->
+        <section class="bg-white rounded-xl p-6 mb-6 card-shadow">
+            <h2 class="text-xl font-bold text-primary mb-4 flex items-center">
+                <i class="fa fa-question-circle-o mr-2"></i>常见问题
+            </h2>
+            <div class="space-y-4">
+                <div class="border-b border-gray-200 pb-4">
+                    <button class="faq-question w-full text-left font-bold text-gray-800 flex justify-between items-center">
+                        <span>如何查询我的消费券是否到账？</span>
+                        <i class="fa fa-chevron-down text-primary transition-transform"></i>
+                    </button>
+                    <div class="faq-answer hidden mt-2 text-gray-600">
+                        <p>审核通过后，云闪付会向您的账户推送消费券。您可以打开云闪付APP，点击"我的-我的优惠券"查看已到账的消费券。</p>
+                    </div>
+                </div>
+                <div class="border-b border-gray-200 pb-4">
+                    <button class="faq-question w-full text-left font-bold text-gray-800 flex justify-between items-center">
+                        <span>消费券可以在哪些商家使用？</span>
+                        <i class="fa fa-chevron-down text-primary transition-transform"></i>
+                    </button>
+                    <div class="faq-answer hidden mt-2 text-gray-600">
+                        <p>消费券可在淘宝APP和苏宁易购APP（或苏宁易购微信小程序）的指定页面使用，购买12类家电产品和3C产品。</p>
+                    </div>
+                </div>
+                <div class="border-b border-gray-200 pb-4">
+                    <button class="faq-question w-full text-left font-bold text-gray-800 flex justify-between items-center">
+                        <span>补贴资金什么时候发放？</span>
+                        <i class="fa fa-chevron-down text-primary transition-transform"></i>
+                    </button>
+                    <div class="faq-answer hidden mt-2 text-gray-600">
+                        <p>购买新车补贴资金部分，由政府对补贴情况进行审计后，根据审计结果统一兑付补贴资金。具体时间请关注官方通知。</p>
+                    </div>
+                </div>
+                <div class="border-b border-gray-200 pb-4">
+                    <button class="faq-question w-full text-left font-bold text-gray-800 flex justify-between items-center">
+                        <span>如果我退货了，消费券会退还吗？</span>
+                        <i class="fa fa-chevron-down text-primary transition-transform"></i>
+                    </button>
+                    <div class="faq-answer hidden mt-2 text-gray-600">
+                        <p>使用消费券的订单全额退货时，消费者实付金额退回至账户，消费券次日返还；部分退货时，退货部分的实付金额退回至账户，消费券不予返还。</p>
+                    </div>
+                </div>
+                <div class="border-b border-gray-200 pb-4">
+                    <button class="faq-question w-full text-left font-bold text-gray-800 flex justify-between items-center">
+                        <span>消费券可以转赠给他人使用吗？</span>
+                        <i class="fa fa-chevron-down text-primary transition-transform"></i>
+                    </button>
+                    <div class="faq-answer hidden mt-2 text-gray-600">
+                        <p>消费券仅限本人使用，不得转赠、转让、出售。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 底部信息 -->
+    <footer class="bg-dark text-white py-6">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <h3 class="text-lg font-bold mb-2">上城汽车商超消费券</h3>
+                    <p class="text-gray-400 text-sm">© 2025 上城区商务局</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-white hover:text-secondary transition-colors">
+                        <i class="fa fa-phone text-xl"></i>
+                    </a>
+                    <a href="#" class="text-white hover:text-secondary transition-colors">
+                        <i class="fa fa-envelope text-xl"></i>
+                    </a>
+                    <a href="#" class="text-white hover:text-secondary transition-colors">
+                        <i class="fa fa-weixin text-xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-6 text-center text-gray-400 text-sm">
+                <p>咨询电话：0571-xxxxxxxx</p>
+                <p class="mt-2">本活动最终解释权归上城区商务局所有</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 企业名单弹窗 -->
+    <div id="companiesModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded-xl p-6 max-w-md w-full max-h-[80vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold text-primary">参与活动汽车企业名单</h3>
+                <button id="closeCompaniesBtn" class="text-gray-500 hover:text-gray-700">
+                    <i class="fa fa-times text-xl"></i>
+                </button>
+            </div>
+            <div class="space-y-3">
+                <div class="p-3 bg-light rounded-lg">
+                    <p class="font-bold">杭州西湖汽车销售服务有限公司</p>
+                    <p class="text-sm text-gray-600">地址：上城区西湖大道128号</p>
+                    <p class="text-sm text-gray-600">电话：0571-87012345</p>
+                </div>
+                <div class="p-3 bg-light rounded-lg">
+                    <p class="font-bold">杭州城东汽车销售有限公司</p>
+                    <p class="text-sm text-gray-600">地址：上城区德胜东路3333号</p>
+                    <p class="text-sm text-gray-600">电话：0571-87067890</p>
+                </div>
+                <div class="p-3 bg-light rounded-lg">
+                    <p class="font-bold">杭州江干汽车贸易有限公司</p>
+                    <p class="text-sm text-gray-600">地址：上城区艮山西路102号</p>
+                    <p class="text-sm text-gray-600">电话：0571-87023456</p>
+                </div>
+                <div class="p-3 bg-light rounded-lg">
+                    <p class="font-bold">杭州上城汽车销售服务有限公司</p>
+                    <p class="text-sm text-gray-600">地址：上城区庆春东路66号</p>
+                    <p class="text-sm text-gray-600">电话：0571-87034567</p>
+                </div>
+                <div class="p-3 bg-light rounded-lg">
+                    <p class="font-bold">杭州南星汽车销售有限公司</p>
+                    <p class="text-sm text-gray-600">地址：上城区复兴路100号</p>
+                    <p class="text-sm text-gray-600">电话：0571-87045678</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 帮助弹窗 -->
+    <div id="helpModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded-xl p-6 max-w-md w-full">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold text-primary">使用帮助</h3>
+                <button id="closeHelpBtn" class="text-gray-500 hover:text-gray-700">
+                    <i class="fa fa-times text-xl"></i>
+                </button>
+            </div>
+            <div class="space-y-3 text-gray-700">
+                <p>1. 本页面提供上城汽车商超消费券的详细信息和智能问答服务</p>
+                <p>2. 您可以在"智能问答"区域输入问题，获取相关解答</p>
+                <p>3. 点击"常见问题"可以查看热门问题及答案</p>
+                <p>4. 如有其他疑问，请拨打咨询电话：0571-xxxxxxxx</p>
+            </div>
+            <div class="mt-6 text-center">
+                <button id="closeHelpBtn2" class="bg-primary hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg transition-all">
+                    我知道了
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 智能问答功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatContainer = document.getElementById('chatContainer');
+            const userInput = document.getElementById('userInput');
+            const sendBtn = document.getElementById('sendBtn');
+            
+            // 预设问答对
+            const qaDatabase = [
+                {
+                    keywords: ['活动时间', '什么时候', '截止', '结束'],
+                    answer: '活动时间为2025年11月25日至2025年12月31日（以新车发票开具时间为准），活动资金消耗完毕则当即结束。'
+                },
+                {
+                    keywords: ['补贴', '多少钱', '标准', '金额'],
+                    answer: '补贴标准如下：\n1. 5万元≤车辆不含税价格<10万元：3000元（含1000元现金补贴+2000元消费券）\n2. 10万元≤车辆不含税价格<20万元：5000元（含2000元现金补贴+3000元消费券）\n3. 20万元≤车辆不含税价格<30万元：8000元（含4000元现金补贴+4000元消费券）\n4. 30万元≤车辆不含税价格：11000元（含6000元现金补贴+5000元消费券）'
+                },
+                {
+                    keywords: ['怎么参与', '如何申请', '参与方式', '申请流程'],
+                    answer: '政策期内，消费者在上城区参加活动的汽车经销企业购买新车，由车企负责帮助消费者上传相关审核信息，经系统审核后，政府将分批向云闪付提供审核通过后的白名单消费者清单，由云闪付向白名单清单对应的云闪付账户推送相应金额消费券。'
+                },
+                {
+                    keywords: ['消费券', '怎么用', '使用说明', '使用范围'],
+                    answer: '消费券使用说明：\n1. 云闪付将向消费者推送多张满500.01减500的消费券，可叠加使用\n2. 可在淘宝APP搜索"汽车商超消费券"，或在苏宁易购APP搜索"上城汽车消费券"，购买指定家电和3C产品\n3. 消费券使用期限至2026年2月28日23:59:59止\n4. 全额退货时消费券次日返还，部分退货时消费券不予返还'
+                },
+                {
+                    keywords: ['哪些企业', '参与企业', '汽车企业', '4S店'],
+                    answer: '您可以点击"查看参与活动汽车企业名单"按钮查看详细的参与企业列表。'
+                },
+                {
+                    keywords: ['咨询电话', '联系方式', '联系电话'],
+                    answer: '咨询电话：0571-xxxxxxxx'
+                },
+                {
+                    keywords: ['现金补贴', '什么时候发', '发放时间'],
+                    answer: '购买新车补贴资金部分，由政府对补贴情况进行审计后，根据审计结果统一兑付补贴资金。具体时间请关注官方通知。'
+                },
+                {
+                    keywords: ['消费券到账', '查询', '怎么查'],
+                    answer: '审核通过后，云闪付会向您的账户推送消费券。您可以打开云闪付APP，点击"我的-我的优惠券"查看已到账的消费券。'
+                }
+            ];
+            
+            // 默认回复
+            const defaultAnswer = '感谢您的咨询。您的问题我已记录，我们的工作人员会尽快为您解答。您也可以拨打咨询电话：0571-xxxxxxxx获取更多帮助。';
+            
+            // 发送消息函数
+            function sendMessage() {
+                const message = userInput.value.trim();
+                if (message === '') return;
+                
+                // 添加用户消息
+                addMessage(message, 'user');
+                userInput.value = '';
+                
+                // 模拟AI思考
+                setTimeout(() => {
+                    const answer = getAnswer(message);
+                    addMessage(answer, 'ai');
+                    
+                    // 滚动到底部
+                    chatContainer.scrollTop = chatContainer.scrollHeight;
+                }, 500);
+            }
+            
+            // 添加消息到聊天框
+            function addMessage(message, sender) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = sender === 'user' ? 'flex justify-end' : 'flex justify-start';
+                
+                const messageContent = document.createElement('div');
+                messageContent.className = sender === 'user' 
+                    ? 'bg-primary text-white rounded-lg py-2 px-4 max-w-[80%]'
+                    : 'bg-gray-200 rounded-lg py-2 px-4 max-w-[80%]';
+                
+                // 将换行符转换为<br>
+                messageContent.innerHTML = message.replace(/\n/g, '<br>');
+                
+                messageDiv.appendChild(messageContent);
+                chatContainer.appendChild(messageDiv);
+                
+                // 滚动到底部
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }
+            
+            // 获取回答
+            function getAnswer(question) {
+                // 转换为小写进行匹配
+                const lowerQuestion = question.toLowerCase();
+                
+                // 遍历预设问答对
+                for (const qa of qaDatabase) {
+                    for (const keyword of qa.keywords) {
+                        if (lowerQuestion.includes(keyword)) {
+                            return qa.answer;
+                        }
+                    }
+                }
+                
+                // 如果没有匹配到，返回默认回答
+                return defaultAnswer;
+            }
+            
+            // 发送按钮点击事件
+            sendBtn.addEventListener('click', sendMessage);
+            
+            // 输入框回车事件
+            userInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+            
+            // 常见问题折叠功能
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', function() {
+                    const answer = this.nextElementSibling;
+                    const icon = this.querySelector('i');
+                    
+                    // 切换显示/隐藏
+                    answer.classList.toggle('hidden');
+                    
+                    // 旋转图标
+                    if (answer.classList.contains('hidden')) {
+                        icon.style.transform = 'rotate(0deg)';
+                    } else {
+                        icon.style.transform = 'rotate(180deg)';
+                    }
+                });
+            });
+            
+            // 企业名单弹窗
+            const showCompaniesBtn = document.getElementById('showCompaniesBtn');
+            const companiesModal = document.getElementById('companiesModal');
+            const closeCompaniesBtn = document.getElementById('closeCompaniesBtn');
+            
+            showCompaniesBtn.addEventListener('click', function() {
+                companiesModal.classList.remove('hidden');
+            });
+            
+            closeCompaniesBtn.addEventListener('click', function() {
+                companiesModal.classList.add('hidden');
+            });
+            
+            // 帮助弹窗
+            const helpBtn = document.getElementById('helpBtn');
+            const helpModal = document.getElementById('helpModal');
+            const closeHelpBtn = document.getElementById('closeHelpBtn');
+            const closeHelpBtn2 = document.getElementById('closeHelpBtn2');
+            
+            helpBtn.addEventListener('click', function() {
+                helpModal.classList.remove('hidden');
+            });
+            
+            closeHelpBtn.addEventListener('click', function() {
+                helpModal.classList.add('hidden');
+            });
+            
+            closeHelpBtn2.addEventListener('click', function() {
+                helpModal.classList.add('hidden');
+            });
+            
+            // 点击弹窗外部关闭弹窗
+            window.addEventListener('click', function(e) {
+                if (e.target === companiesModal) {
+                    companiesModal.classList.add('hidden');
+                }
+                if (e.target === helpModal) {
+                    helpModal.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
