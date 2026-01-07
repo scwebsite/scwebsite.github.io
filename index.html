@@ -2,481 +2,616 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>上城汽车商超消费券</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#1E40AF',
-                        secondary: '#3B82F6',
-                        accent: '#F97316',
-                        light: '#F3F4F6',
-                        dark: '#1F2937'
-                    },
-                    fontFamily: {
-                        sans: ['PingFang SC', 'Helvetica Neue', 'Arial', 'sans-serif']
-                    }
-                }
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>浙江汽车商超消费券使用指南</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft Yahei", sans-serif;
+        }
+        body {
+            background-color: #f5faf7;
+            color: #333;
+            line-height: 1.6;
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+        .container {
+            width: 100%;
+            padding: 10px;
+            margin: 0 auto;
+        }
+        /* 标题样式 */
+        .header {
+            text-align: center;
+            padding: 15px 10px;
+            background: linear-gradient(135deg, #2d9969, #4fc37f);
+            color: white;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .header h1 {
+            font-size: 20px;
+            font-weight: 600;
+        }
+        .header p {
+            font-size: 12px;
+            margin-top: 6px;
+            opacity: 0.9;
+        }
+        /* 流程模块 */
+        .process-section {
+            background: white;
+            padding: 20px 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 6px rgba(45, 153, 105, 0.1);
+        }
+        .process-section h2 {
+            color: #2d9969;
+            font-size: 16px;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e8f5e9;
+        }
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .step {
+            flex: 1;
+            min-width: 80px;
+            text-align: center;
+            padding: 12px 8px;
+            background: #e8f5e9;
+            border-radius: 6px;
+            color: #2d9969;
+            font-size: 12px;
+        }
+        .step span {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: #1b5e20;
+            font-size: 13px;
+        }
+        .arrow {
+            color: #2d9969;
+            font-size: 16px;
+            font-weight: bold;
+            line-height: 1;
+        }
+        /* 规则模块 */
+        .rules-section {
+            background: white;
+            padding: 20px 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 6px rgba(45, 153, 105, 0.1);
+        }
+        .rules-section h2 {
+            color: #2d9969;
+            font-size: 16px;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e8f5e9;
+        }
+        .rules-list {
+            list-style: decimal;
+            padding-left: 20px;
+            font-size: 13px;
+        }
+        .rules-list li {
+            margin-bottom: 10px;
+            line-height: 1.7;
+        }
+        .rules-list strong {
+            color: #1b5e20;
+        }
+        /* 红色加粗样式 */
+        .red-bold {
+            color: red;
+            font-weight: bold;
+        }
+        /* 问答模块 */
+        .qa-section {
+            background: white;
+            padding: 20px 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 6px rgba(45, 153, 105, 0.1);
+        }
+        .qa-section h2 {
+            color: #2d9969;
+            font-size: 16px;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e8f5e9;
+        }
+        /* 推荐问题样式 */
+        .recommend-questions {
+            margin-bottom: 12px;
+            font-size: 13px;
+        }
+        .recommend-questions p {
+            color: #666;
+            margin-bottom: 6px;
+        }
+        .recommend-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .recommend-tag {
+            padding: 5px 10px;
+            background: #e8f5e9;
+            color: #2d9969;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            border: none;
+            touch-action: manipulation;
+        }
+        .recommend-tag:hover, .recommend-tag:active {
+            background: #2d9969;
+            color: white;
+        }
+        .qa-input {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+            flex-wrap: nowrap;
+        }
+        #questionInput {
+            flex: 1;
+            padding: 12px 10px;
+            border: 1px solid #dcedc8;
+            border-radius: 6px;
+            font-size: 13px;
+            outline: none;
+            resize: none;
+        }
+        #questionInput:focus {
+            border-color: #2d9969;
+            box-shadow: 0 0 0 2px rgba(45, 153, 105, 0.1);
+        }
+        #submitBtn {
+            padding: 12px 20px;
+            background: #2d9969;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: background 0.3s;
+            touch-action: manipulation;
+        }
+        #submitBtn:hover, #submitBtn:active {
+            background: #1b5e20;
+        }
+        .answer-box {
+            padding: 12px 10px;
+            background: #e8f5e9;
+            border-radius: 6px;
+            min-height: 70px;
+            font-size: 13px;
+            color: #333;
+            white-space: pre-line;
+        }
+        .customer-service {
+            margin-top: 15px;
+            padding: 12px 10px;
+            background: #f1f8e9;
+            border-radius: 6px;
+            font-size: 13px;
+        }
+        .customer-service p {
+            margin-bottom: 6px;
+        }
+        .customer-service strong {
+            color: #1b5e20;
+        }
+        /* 二维码样式 */
+        .qrcode-container {
+            text-align: center;
+            margin-top: 8px;
+        }
+        .qrcode-img {
+            width: 140px;
+            height: 140px;
+            border: 1px solid #e8f5e9;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .qrcode-tip {
+            font-size: 11px;
+            color: #666;
+            margin-top: 4px;
+        }
+        /* 二维码弹窗 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .modal-content {
+            position: relative;
+        }
+        .modal-img {
+            max-width: 90%;
+            max-height: 80vh;
+            border: 4px solid white;
+            border-radius: 8px;
+        }
+        .close-btn {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 30px;
+            height: 30px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px;
+            color: #333;
+            cursor: pointer;
+        }
+        /* 响应式适配 */
+        @media screen and (max-width: 375px) {
+            .step {
+                min-width: 70px;
+                padding: 10px 5px;
+            }
+            .step span {
+                font-size: 12px;
+            }
+            .arrow {
+                font-size: 14px;
+            }
+            #submitBtn {
+                padding: 12px 15px;
             }
         }
-    </script>
-    <style type="text/tailwindcss">
-        @layer utilities {
-            .text-shadow {
-                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        @media screen and (min-width: 768px) {
+            .container {
+                max-width: 700px;
+                padding: 20px;
             }
-            .card-shadow {
-                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            .header h1 {
+                font-size: 22px;
             }
-            .gradient-bg {
-                background: linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%);
-            }
-            .btn-shadow {
-                box-shadow: 0 4px 0 0 #1E40AF;
-            }
-            .btn-active {
-                transform: translateY(4px);
-                box-shadow: 0 0 0 0 #1E40AF;
+            .step {
+                min-width: 100px;
             }
         }
     </style>
 </head>
-<body class="bg-gray-50 font-sans">
-    <!-- 顶部导航栏 -->
-    <header class="gradient-bg text-white shadow-md sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <h1 class="text-xl md:text-2xl font-bold text-shadow">上城汽车商超消费券</h1>
-            <button id="helpBtn" class="bg-white/20 hover:bg-white/30 rounded-full p-2 transition-all">
-                <i class="fa fa-question-circle text-lg"></i>
-            </button>
+<body>
+    <div class="container">
+        <!-- 头部标题 -->
+        <div class="header">
+            <h1>浙江汽车商超消费券使用指南</h1>
+            <p>余杭&上城 | 淘宝购物官方指引</p>
         </div>
-    </header>
 
-    <!-- 主要内容区 -->
-    <main class="container mx-auto px-4 py-6">
-        <!-- 活动时间 -->
-        <section class="bg-white rounded-xl p-6 mb-6 card-shadow">
-            <h2 class="text-xl font-bold text-primary mb-4 flex items-center">
-                <i class="fa fa-calendar mr-2"></i>活动时间
-            </h2>
-            <p class="text-gray-700 leading-relaxed">
-                2025年11月25日至2025年12月31日（以新车发票开具时间为准），活动资金消耗完毕则当即结束。
-            </p>
-        </section>
-
-        <!-- 补贴标准 -->
-        <section class="bg-white rounded-xl p-6 mb-6 card-shadow">
-            <h2 class="text-xl font-bold text-primary mb-4 flex items-center">
-                <i class="fa fa-gift mr-2"></i>补贴标准
-            </h2>
-            <div class="space-y-4">
-                <div class="bg-light rounded-lg p-4 border-l-4 border-secondary">
-                    <h3 class="font-bold text-gray-800">5万元≤车辆不含税价格&lt;10万元</h3>
-                    <p class="text-accent font-bold text-xl mt-2">3000元</p>
-                    <p class="text-gray-600 text-sm">(含1000元现金补贴+2000元消费券)</p>
+        <!-- 流程模块 -->
+        <div class="process-section">
+            <h2>使用流程</h2>
+            <div class="process-steps">
+                <div class="step">
+                    <span>步骤1</span>
+                    云闪付领取优惠
                 </div>
-                <div class="bg-light rounded-lg p-4 border-l-4 border-secondary">
-                    <h3 class="font-bold text-gray-800">10万元≤车辆不含税价格&lt;20万元</h3>
-                    <p class="text-accent font-bold text-xl mt-2">5000元</p>
-                    <p class="text-gray-600 text-sm">(含2000元现金补贴+3000元消费券)</p>
+                <span class="arrow">→</span>
+                <div class="step">
+                    <span>步骤2</span>
+                    上淘宝激活
                 </div>
-                <div class="bg-light rounded-lg p-4 border-l-4 border-secondary">
-                    <h3 class="font-bold text-gray-800">20万元≤车辆不含税价格&lt;30万元</h3>
-                    <p class="text-accent font-bold text-xl mt-2">8000元</p>
-                    <p class="text-gray-600 text-sm">(含4000元现金补贴+4000元消费券)</p>
+                <span class="arrow">→</span>
+                <div class="step">
+                    <span>步骤3</span>
+                    会场购物
                 </div>
-                <div class="bg-light rounded-lg p-4 border-l-4 border-secondary">
-                    <h3 class="font-bold text-gray-800">30万元≤车辆不含税价格</h3>
-                    <p class="text-accent font-bold text-xl mt-2">11000元</p>
-                    <p class="text-gray-600 text-sm">(含6000元现金补贴+5000元消费券)</p>
-                </div>
-            </div>
-            <p class="mt-4 text-gray-600 text-sm italic">
-                购买新车补贴资金部分，由政府对补贴情况进行审计后，根据审计结果统一兑付补贴资金，消费券通过云闪付平台发放。
-            </p>
-        </section>
-
-        <!-- 参与方式 -->
-        <section class="bg-white rounded-xl p-6 mb-6 card-shadow">
-            <h2 class="text-xl font-bold text-primary mb-4 flex items-center">
-                <i class="fa fa-handshake-o mr-2"></i>参与方式
-            </h2>
-            <div class="space-y-3 text-gray-700 leading-relaxed">
-                <p>政策期内，消费者在上城区参加活动的汽车经销企业购买新车，由车企负责帮助消费者上传相关审核信息，经系统审核后，政府将分批向云闪付提供审核通过后的白名单消费者清单，由云闪付向白名单清单对应的云闪付账户推送相应金额消费券，消费券可在指定平台（商户）内核销。</p>
-                <div class="mt-4">
-                    <button id="showCompaniesBtn" class="bg-secondary hover:bg-primary text-white font-bold py-2 px-4 rounded-lg transition-all btn-shadow active:btn-active">
-                        查看参与活动汽车企业名单
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- 消费券使用说明 -->
-        <section class="bg-white rounded-xl p-6 mb-6 card-shadow">
-            <h2 class="text-xl font-bold text-primary mb-4 flex items-center">
-                <i class="fa fa-credit-card mr-2"></i>消费券使用说明
-            </h2>
-            <div class="space-y-4 text-gray-700 leading-relaxed">
-                <div class="flex">
-                    <span class="bg-primary text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0 mt-1">1</span>
-                    <p>对审核通过的消费者，云闪付将向消费者推送多张满500.01减500的消费券，可叠加使用。</p>
-                </div>
-                <div class="flex">
-                    <span class="bg-primary text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0 mt-1">2</span>
-                    <p>消费券需在指定线上平台使用。消费者可打开淘宝APP搜索"汽车商超消费券"，打开苏宁易购APP或苏宁易购微信小程序搜索"上城汽车消费券"，在指定页面购买12类家电产品以及手机、平板（含学习机）、智能手表（手环）等3C产品，通过云闪付支付核销。</p>
-                </div>
-                <div class="flex">
-                    <span class="bg-primary text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0 mt-1">3</span>
-                    <p>消费券使用期限至2026年2月28日23:59:59止，不可找零，过期作废，不再补发。</p>
-                </div>
-                <div class="flex">
-                    <span class="bg-primary text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0 mt-1">4</span>
-                    <p>使用消费券的订单全额退货时，消费者实付金额退回至账户，消费券次日返还；部分退货时，退货部分的实付金额退回至账户，消费券不予返还。</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- 智能问答 -->
-        <section class="bg-white rounded-xl p-6 mb-6 card-shadow">
-            <h2 class="text-xl font-bold text-primary mb-4 flex items-center">
-                <i class="fa fa-comments-o mr-2"></i>智能问答
-            </h2>
-            <div id="chatContainer" class="bg-light rounded-lg p-4 h-80 overflow-y-auto mb-4 space-y-4">
-                <div class="flex justify-start">
-                    <div class="bg-gray-200 rounded-lg py-2 px-4 max-w-[80%]">
-                        <p class="text-gray-800">您好！我是上城汽车消费券智能助手，有什么可以帮您解答的问题吗？</p>
-                    </div>
-                </div>
-            </div>
-            <div class="flex">
-                <input type="text" id="userInput" class="flex-1 border border-gray-300 rounded-l-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary" placeholder="请输入您的问题...">
-                <button id="sendBtn" class="bg-primary hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r-lg transition-all">
-                    <i class="fa fa-paper-plane"></i>
-                </button>
-            </div>
-        </section>
-
-        <!-- 常见问题 -->
-        <section class="bg-white rounded-xl p-6 mb-6 card-shadow">
-            <h2 class="text-xl font-bold text-primary mb-4 flex items-center">
-                <i class="fa fa-question-circle-o mr-2"></i>常见问题
-            </h2>
-            <div class="space-y-4">
-                <div class="border-b border-gray-200 pb-4">
-                    <button class="faq-question w-full text-left font-bold text-gray-800 flex justify-between items-center">
-                        <span>如何查询我的消费券是否到账？</span>
-                        <i class="fa fa-chevron-down text-primary transition-transform"></i>
-                    </button>
-                    <div class="faq-answer hidden mt-2 text-gray-600">
-                        <p>审核通过后，云闪付会向您的账户推送消费券。您可以打开云闪付APP，点击"我的-我的优惠券"查看已到账的消费券。</p>
-                    </div>
-                </div>
-                <div class="border-b border-gray-200 pb-4">
-                    <button class="faq-question w-full text-left font-bold text-gray-800 flex justify-between items-center">
-                        <span>消费券可以在哪些商家使用？</span>
-                        <i class="fa fa-chevron-down text-primary transition-transform"></i>
-                    </button>
-                    <div class="faq-answer hidden mt-2 text-gray-600">
-                        <p>消费券可在淘宝APP和苏宁易购APP（或苏宁易购微信小程序）的指定页面使用，购买12类家电产品和3C产品。</p>
-                    </div>
-                </div>
-                <div class="border-b border-gray-200 pb-4">
-                    <button class="faq-question w-full text-left font-bold text-gray-800 flex justify-between items-center">
-                        <span>补贴资金什么时候发放？</span>
-                        <i class="fa fa-chevron-down text-primary transition-transform"></i>
-                    </button>
-                    <div class="faq-answer hidden mt-2 text-gray-600">
-                        <p>购买新车补贴资金部分，由政府对补贴情况进行审计后，根据审计结果统一兑付补贴资金。具体时间请关注官方通知。</p>
-                    </div>
-                </div>
-                <div class="border-b border-gray-200 pb-4">
-                    <button class="faq-question w-full text-left font-bold text-gray-800 flex justify-between items-center">
-                        <span>如果我退货了，消费券会退还吗？</span>
-                        <i class="fa fa-chevron-down text-primary transition-transform"></i>
-                    </button>
-                    <div class="faq-answer hidden mt-2 text-gray-600">
-                        <p>使用消费券的订单全额退货时，消费者实付金额退回至账户，消费券次日返还；部分退货时，退货部分的实付金额退回至账户，消费券不予返还。</p>
-                    </div>
-                </div>
-                <div class="border-b border-gray-200 pb-4">
-                    <button class="faq-question w-full text-left font-bold text-gray-800 flex justify-between items-center">
-                        <span>消费券可以转赠给他人使用吗？</span>
-                        <i class="fa fa-chevron-down text-primary transition-transform"></i>
-                    </button>
-                    <div class="faq-answer hidden mt-2 text-gray-600">
-                        <p>消费券仅限本人使用，不得转赠、转让、出售。</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- 底部信息 -->
-    <footer class="bg-dark text-white py-6">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-4 md:mb-0">
-                    <h3 class="text-lg font-bold mb-2">上城汽车商超消费券</h3>
-                    <p class="text-gray-400 text-sm">© 2025 上城区商务局</p>
-                </div>
-                <div class="flex space-x-4">
-                    <a href="#" class="text-white hover:text-secondary transition-colors">
-                        <i class="fa fa-phone text-xl"></i>
-                    </a>
-                    <a href="#" class="text-white hover:text-secondary transition-colors">
-                        <i class="fa fa-envelope text-xl"></i>
-                    </a>
-                    <a href="#" class="text-white hover:text-secondary transition-colors">
-                        <i class="fa fa-weixin text-xl"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="mt-6 text-center text-gray-400 text-sm">
-                <p>咨询电话：0571-xxxxxxxx</p>
-                <p class="mt-2">本活动最终解释权归上城区商务局所有</p>
             </div>
         </div>
-    </footer>
 
-    <!-- 企业名单弹窗 -->
-    <div id="companiesModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
-        <div class="bg-white rounded-xl p-6 max-w-md w-full max-h-[80vh] overflow-y-auto">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-bold text-primary">参与活动汽车企业名单</h3>
-                <button id="closeCompaniesBtn" class="text-gray-500 hover:text-gray-700">
-                    <i class="fa fa-times text-xl"></i>
-                </button>
+        <!-- 重要规则说明 -->
+        <div class="rules-section">
+            <h2>重要规则说明</h2>
+            <ul class="rules-list">
+                <li>浙江汽车消费券参与需在<strong>指定车企购车</strong>后通过<strong>云闪付领券</strong>后方可使用</li>
+                <li>淘天购买前需点击<strong>指定会场领券</strong>后才可生效优惠</li>
+                <li>优惠在不同地区在<strong>指定店铺</strong>和<strong>部分商品</strong>可生效</li>
+                <li>淘宝上不支持<strong>云闪付优惠合并支付</strong>，即一次只可购买一种商品</li>
+                <li>用户购物单件需要至少满足<span class="red-bold">500元（余杭为200元）。不可凑单</span>，超过500元的可以叠加使用优惠券，只用券用完为止</li>
+                <li>券使用后退款，优惠券会在<strong>第二天</strong>进行退回，若有问题可咨询<strong>云闪付</strong></li>
+                <li>关于优惠券本身的问题，请找<strong>车企</strong>或者<strong>云闪付客服</strong>进行咨询</li>
+            </ul>
+        </div>
+
+        <!-- 问答模块 -->
+        <div class="qa-section">
+            <h2>智能问答</h2>
+            
+            <!-- 智能推荐问题 -->
+            <div class="recommend-questions">
+                <p>💡 热门问题推荐：</p>
+                <div class="recommend-tags" id="recommendTags">
+                    <!-- 动态生成推荐标签 -->
+                </div>
             </div>
-            <div class="space-y-3">
-                <div class="p-3 bg-light rounded-lg">
-                    <p class="font-bold">杭州西湖汽车销售服务有限公司</p>
-                    <p class="text-sm text-gray-600">地址：上城区西湖大道128号</p>
-                    <p class="text-sm text-gray-600">电话：0571-87012345</p>
-                </div>
-                <div class="p-3 bg-light rounded-lg">
-                    <p class="font-bold">杭州城东汽车销售有限公司</p>
-                    <p class="text-sm text-gray-600">地址：上城区德胜东路3333号</p>
-                    <p class="text-sm text-gray-600">电话：0571-87067890</p>
-                </div>
-                <div class="p-3 bg-light rounded-lg">
-                    <p class="font-bold">杭州江干汽车贸易有限公司</p>
-                    <p class="text-sm text-gray-600">地址：上城区艮山西路102号</p>
-                    <p class="text-sm text-gray-600">电话：0571-87023456</p>
-                </div>
-                <div class="p-3 bg-light rounded-lg">
-                    <p class="font-bold">杭州上城汽车销售服务有限公司</p>
-                    <p class="text-sm text-gray-600">地址：上城区庆春东路66号</p>
-                    <p class="text-sm text-gray-600">电话：0571-87034567</p>
-                </div>
-                <div class="p-3 bg-light rounded-lg">
-                    <p class="font-bold">杭州南星汽车销售有限公司</p>
-                    <p class="text-sm text-gray-600">地址：上城区复兴路100号</p>
-                    <p class="text-sm text-gray-600">电话：0571-87045678</p>
+
+            <div class="qa-input">
+                <input type="text" id="questionInput" placeholder="请输入您的问题（如：上城区汽车消费券如何使用）">
+                <button id="submitBtn">提问</button>
+            </div>
+            <div class="answer-box" id="answerBox">
+                请输入您的问题，我会为您解答汽车消费券相关问题~
+            </div>
+            <div class="customer-service">
+                <p>💡 人工咨询指引：</p>
+                <p>云闪付领券问题：咨询<strong>购车汽车门店</strong></p>
+                <p>淘宝购物问题：咨询淘宝客服 15858250755；也可加入微信答疑群：</p>
+                <!-- 二维码模块 -->
+                <div class="qrcode-container">
+                    <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/3bcbd4a494d347cd96b4fdffeb3d47e6.png~tplv-a9rns2rl98-image.png?rcl=20260105144318C52A3AB15181F3B05BA4&rk3s=8e244e95&rrcfp=dafada99&x-expires=2083819398&x-signature=w8ORmEso4XP2Q8x8RvLgVc5gRCM%3D" 
+                         alt="淘天汽车消费券问题解决群" 
+                         class="qrcode-img"
+                         id="qrcodeImg">
+                    <p class="qrcode-tip">点击图片可放大，长按可保存到相册</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 帮助弹窗 -->
-    <div id="helpModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
-        <div class="bg-white rounded-xl p-6 max-w-md w-full">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-bold text-primary">使用帮助</h3>
-                <button id="closeHelpBtn" class="text-gray-500 hover:text-gray-700">
-                    <i class="fa fa-times text-xl"></i>
-                </button>
-            </div>
-            <div class="space-y-3 text-gray-700">
-                <p>1. 本页面提供上城汽车商超消费券的详细信息和智能问答服务</p>
-                <p>2. 您可以在"智能问答"区域输入问题，获取相关解答</p>
-                <p>3. 点击"常见问题"可以查看热门问题及答案</p>
-                <p>4. 如有其他疑问，请拨打咨询电话：0571-xxxxxxxx</p>
-            </div>
-            <div class="mt-6 text-center">
-                <button id="closeHelpBtn2" class="bg-primary hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg transition-all">
-                    我知道了
-                </button>
-            </div>
+    <!-- 二维码放大弹窗 -->
+    <div class="modal" id="qrcodeModal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeBtn">×</span>
+            <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/3bcbd4a494d347cd96b4fdffeb3d47e6.png~tplv-a9rns2rl98-image.png?rcl=20260105144318C52A3AB15181F3B05BA4&rk3s=8e244e95&rrcfp=dafada99&x-expires=2083819398&x-signature=w8ORmEso4XP2Q8x8RvLgVc5gRCM%3D" 
+                 alt="淘天汽车消费券问题解决群" 
+                 class="modal-img">
         </div>
     </div>
 
     <script>
-        // 智能问答功能
-        document.addEventListener('DOMContentLoaded', function() {
-            const chatContainer = document.getElementById('chatContainer');
-            const userInput = document.getElementById('userInput');
-            const sendBtn = document.getElementById('sendBtn');
+        // 问答语料库（完整保留模糊搜索逻辑）
+        const qaData = [
+           
+            {
+                keywords: ["申领条件", "申请要求", "资格", "谁能领", "领取条件"],
+                question: "上城区汽车消费券申领需要什么条件",
+                answer: "1. 需在杭州市上城区指定车企完成购车（提供购车合同/发票）；\n2. 云闪付账号已完成实名认证（绑定本人身份证、银行卡）；\n3. 淘宝/支付宝账号与云闪付账号实名信息一致；\n4. 非企业用户（仅限个人消费者）。"
+            },
+            {
+                keywords: ["领取后有效期", "领券过期时间", "券有效期", "领后能用多久"],
+                question: "消费券领取后多久过期",
+                answer: "上城区汽车消费券领取后有效期为30天，从领取当日0点开始计算；\n逾期未激活或未使用的券将自动失效，无法恢复，需重新申领（若活动仍在开展）。"
+            },
+            {
+                keywords: ["领取次数", "能领几次", "重复领", "多次申领"],
+                question: "同一用户能领几次消费券",
+                answer: "同一用户（按云闪付实名信息判定）在活动周期内仅可申领1次上城区汽车消费券；\n若券已使用或已过期，且活动仍在开展，可再次申领（具体以活动规则为准）。"
+            },
+            {
+                keywords: ["使用门槛", "满多少能用", "金额要求", "最低消费"],
+                question: "消费券使用时需要满多少金额",
+                answer: "1. 上城区单件商品需满足至少500元（不可凑单，需单独购买）；余杭区单件商品需满足至少200元；\n2. 超过面额的部分可叠加使用多张消费券（例如：1000元商品可使用2张500元券）；\n3. 不足面额（上城500/余杭200）的商品无法使用消费券。"
+            },
+            {
+                keywords: ["可用店铺", "指定店铺", "哪里能用", "适用店铺"],
+                question: "哪些店铺可以使用消费券",
+                answer: "1. 淘宝「汽车商超消费券」指定会场内的店铺（搜索“汽车商超消费券”进入会场即可查看）；\n2. 店铺需标注“支持上城区汽车消费券”标识，未标注的店铺不可用；\n3. 非会场内店铺或未标注店铺，即使商品符合品类要求，也无法使用券。"
+            },
+            {
+                keywords: ["虚拟商品", "充值", "会员", "话费", "游戏"],
+                question: "消费券可以购买虚拟商品吗",
+                answer: "上城区汽车消费券<strong>仅支持购买实物商品</strong>，不可用于购买虚拟商品，包括但不限于：\n话费充值、游戏点卡、会员订阅、电子书、虚拟币等。"
+            },
+            {
+                keywords: ["忘记激活", "未激活", "激活过期", "没激活"],
+                question: "忘记激活消费券怎么办",
+                answer: "1. 若消费券仍在领取后的30天有效期内，可打开淘宝→搜索“汽车商超消费券”→进入会场→找到“激活资格”按钮完成激活；\n2. 若已超过有效期，激活入口将关闭，券自动失效，需重新申领（若活动仍在开展）。"
+            },
+            {
+                keywords: ["激活信息", "激活要什么", "激活材料"],
+                question: "激活消费券需要什么信息",
+                answer: "激活上城区汽车消费券仅需验证淘宝账号与云闪付账号的实名一致性，无需额外提供信息；\n若提示“实名不一致”，需先修改淘宝/支付宝实名信息，确保与云闪付一致后再激活。"
+            },
+            {
+                keywords: ["退款退券", "退货退券", "退款后券", "退券规则"],
+                question: "消费券使用后申请退款，券会退回吗",
+                answer: "1. 若商品全额退款且在消费券有效期内，已使用的券将在<strong>退款成功后次日24点前</strong>退回至云闪付账户，可重新使用；\n2. 若商品部分退款或券已过期，券将不予退回；\n3. 若退款时活动已结束，退回的券也无法使用。"
+            },
+            {
+                keywords: ["云闪付没券", "找不到券", "券不见了", "云闪付查不到"],
+                question: "云闪付找不到消费券怎么办",
+                answer: "1. 打开云闪付APP→点击底部“我的”→进入“优惠券”页面，在“未使用”列表中查找；\n2. 若未找到，检查是否用错云闪付账号（需与申领时的账号一致）；\n3. 若仍找不到，联系云闪付客服（95516）查询券的状态。"
+            },
+            {
+                keywords: ["账号不一致", "实名不一致", "激活失败", "身份不匹配"],
+                question: "淘宝激活时提示“账号不一致”怎么解决",
+                answer: "1. 检查淘宝账号绑定的支付宝实名信息，是否与云闪付实名信息（姓名、身份证号）完全一致；\n2. 若不一致，修改淘宝/支付宝实名信息（路径：支付宝→我的→设置→账号与安全→实名认证）；\n3. 修改后24小时内生效，生效后再重新尝试激活。"
+            },
+            {
+                keywords: ["活动结束", "券未使用", "过期券", "活动后券"],
+                question: "活动结束后未使用的消费券怎么办",
+                answer: "活动结束后，无论消费券是否在领取后的30天有效期内，均无法再使用或激活；\n未使用的券将自动失效，不予补发或折现，用户需关注活动时间，及时使用。"
+            },
+            // 原有条目（如之前的10条）保留在下方，无需删除
             
-            // 预设问答对
-            const qaDatabase = [
-                {
-                    keywords: ['活动时间', '什么时候', '截止', '结束'],
-                    answer: '活动时间为2025年11月25日至2025年12月31日（以新车发票开具时间为准），活动资金消耗完毕则当即结束。'
-                },
-                {
-                    keywords: ['补贴', '多少钱', '标准', '金额'],
-                    answer: '补贴标准如下：\n1. 5万元≤车辆不含税价格<10万元：3000元（含1000元现金补贴+2000元消费券）\n2. 10万元≤车辆不含税价格<20万元：5000元（含2000元现金补贴+3000元消费券）\n3. 20万元≤车辆不含税价格<30万元：8000元（含4000元现金补贴+4000元消费券）\n4. 30万元≤车辆不含税价格：11000元（含6000元现金补贴+5000元消费券）'
-                },
-                {
-                    keywords: ['怎么参与', '如何申请', '参与方式', '申请流程'],
-                    answer: '政策期内，消费者在上城区参加活动的汽车经销企业购买新车，由车企负责帮助消费者上传相关审核信息，经系统审核后，政府将分批向云闪付提供审核通过后的白名单消费者清单，由云闪付向白名单清单对应的云闪付账户推送相应金额消费券。'
-                },
-                {
-                    keywords: ['消费券', '怎么用', '使用说明', '使用范围'],
-                    answer: '消费券使用说明：\n1. 云闪付将向消费者推送多张满500.01减500的消费券，可叠加使用\n2. 可在淘宝APP搜索"汽车商超消费券"，或在苏宁易购APP搜索"上城汽车消费券"，购买指定家电和3C产品\n3. 消费券使用期限至2026年2月28日23:59:59止\n4. 全额退货时消费券次日返还，部分退货时消费券不予返还'
-                },
-                {
-                    keywords: ['哪些企业', '参与企业', '汽车企业', '4S店'],
-                    answer: '您可以点击"查看参与活动汽车企业名单"按钮查看详细的参与企业列表。'
-                },
-                {
-                    keywords: ['咨询电话', '联系方式', '联系电话'],
-                    answer: '咨询电话：0571-xxxxxxxx'
-                },
-                {
-                    keywords: ['现金补贴', '什么时候发', '发放时间'],
-                    answer: '购买新车补贴资金部分，由政府对补贴情况进行审计后，根据审计结果统一兑付补贴资金。具体时间请关注官方通知。'
-                },
-                {
-                    keywords: ['消费券到账', '查询', '怎么查'],
-                    answer: '审核通过后，云闪付会向您的账户推送消费券。您可以打开云闪付APP，点击"我的-我的优惠券"查看已到账的消费券。'
-                }
-            ];
-            
-            // 默认回复
-            const defaultAnswer = '感谢您的咨询。您的问题我已记录，我们的工作人员会尽快为您解答。您也可以拨打咨询电话：0571-xxxxxxxx获取更多帮助。';
-            
-            // 发送消息函数
-            function sendMessage() {
-                const message = userInput.value.trim();
-                if (message === '') return;
-                
-                // 添加用户消息
-                addMessage(message, 'user');
-                userInput.value = '';
-                
-                // 模拟AI思考
-                setTimeout(() => {
-                    const answer = getAnswer(message);
-                    addMessage(answer, 'ai');
-                    
-                    // 滚动到底部
-                    chatContainer.scrollTop = chatContainer.scrollHeight;
-                }, 500);
+    
+            {
+                keywords: ["使用方法", "怎么用", "如何使用", "使用流程"],
+                question: "上城区汽车消费券如何使用",
+                answer: "第一步：去云闪付检查资格是否下方（打开云闪付app-我的—优惠券）\n第二步：打开手机淘宝—搜索汽车商超消费券—点进进入第一个—激活资格—返回会场去购买商品"
+            },
+            {
+                keywords: ["无法使用", "用不了", "后台可见", "不能用"],
+                question: "上城汽车消费券在后台可以看到但无法使用",
+                answer: "第一步：确定是否领取购买资格\n第二步：确定是否领取国补资格\n第三步：同时领取的话需要将国补资格取消后 才可使用云闪付汽车商超消费券"
+            },
+            {
+                keywords: ["抵扣玩法", "叠加使用", "补贴抵扣", "使用规则"],
+                question: "汽车消费券的补贴抵扣玩法是则么样的？消费券是否可以支持叠加使用？",
+                answer: "例：有200元的消费券，要购买的商品实物价格是210元，则消费者需自己垫付10元。反之实物商品190元，则消费券无法使用，必须用于高于消费券的价格商品"
+            },
+            {
+                keywords: ["苹果15", "商品没有", "供给商品", "商品缺失"],
+                question: "我要购买苹果15，为什么这边供给商品没有？",
+                answer: "商品供给淘宝侧会一直持续更新，如果您不是特别着急可以等等再购买，或者联系人工咨询"
+            },
+            {
+                keywords: ["没出来会场", "搜索不到会场", "会场找不到"],
+                question: "搜索汽车商超消费券没出来会场",
+                answer: "1、检查手机淘宝是不是最新版本\n2、搜索 汽车商超消费券 不要出现错别字\n3、前两步如果都检查没问题的话，核实自己手机是不是鸿蒙系统 如果是的话更换下手机 目前存在不兼容的情况"
+            },
+            {
+                keywords: ["品类少", "商品少", "品类有限"],
+                question: "上城区消费券品类少",
+                answer: "目前上城区政府仅支持家电国10+数码3类"
+            },
+            {
+                keywords: ["有效期", "到期时间", "使用期限"],
+                question: "上城区汽车消费券的有效期到什么时候",
+                answer: "目前上城消费券的时间上看是到2026年2月28日。"
+            },
+            {
+                keywords: ["无法领取资格", "领不了资格", "淘宝领不到"],
+                question: "云闪付有消费券，为什么淘宝无法领取资格",
+                answer: "检查淘宝登录的账号是否跟云闪付账号实名是同一个，如果不是则无法领取资格"
+            },
+            {
+                keywords: ["国家补贴认证", "补贴认证", "实名认证"],
+                question: "需要完成国家补贴认证",
+                answer: "1、淘宝实名认证完成\n2、支付宝实名认证完成\n3、绑定您的手机号"
+            },
+            {
+                keywords: ["人工", "客服", "咨询", "联系方式"],
+                question: "人工客服联系方式",
+                answer: "您可以参考以下人工咨询方式：\n1. 云闪付领券问题：咨询购车汽车门店\n2. 淘宝购物问题：咨询淘宝客服 15858250755；也可加入微信答疑群（扫码即可）"
             }
-            
-            // 添加消息到聊天框
-            function addMessage(message, sender) {
-                const messageDiv = document.createElement('div');
-                messageDiv.className = sender === 'user' ? 'flex justify-end' : 'flex justify-start';
-                
-                const messageContent = document.createElement('div');
-                messageContent.className = sender === 'user' 
-                    ? 'bg-primary text-white rounded-lg py-2 px-4 max-w-[80%]'
-                    : 'bg-gray-200 rounded-lg py-2 px-4 max-w-[80%]';
-                
-                // 将换行符转换为<br>
-                messageContent.innerHTML = message.replace(/\n/g, '<br>');
-                
-                messageDiv.appendChild(messageContent);
-                chatContainer.appendChild(messageDiv);
-                
-                // 滚动到底部
-                chatContainer.scrollTop = chatContainer.scrollHeight;
-            }
-            
-            // 获取回答
-            function getAnswer(question) {
-                // 转换为小写进行匹配
-                const lowerQuestion = question.toLowerCase();
-                
-                // 遍历预设问答对
-                for (const qa of qaDatabase) {
-                    for (const keyword of qa.keywords) {
-                        if (lowerQuestion.includes(keyword)) {
-                            return qa.answer;
-                        }
-                    }
-                }
-                
-                // 如果没有匹配到，返回默认回答
-                return defaultAnswer;
-            }
-            
-            // 发送按钮点击事件
-            sendBtn.addEventListener('click', sendMessage);
-            
-            // 输入框回车事件
-            userInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    sendMessage();
-                }
+        ];
+
+        // 获取所有DOM元素
+        const questionInput = document.getElementById('questionInput');
+        const submitBtn = document.getElementById('submitBtn');
+        const answerBox = document.getElementById('answerBox');
+        const recommendTags = document.getElementById('recommendTags');
+        const qrcodeImg = document.getElementById('qrcodeImg');
+        const qrcodeModal = document.getElementById('qrcodeModal');
+        const closeBtn = document.getElementById('closeBtn');
+
+        // 初始化推荐问题标签（智能推荐核心）
+        function initRecommendTags() {
+            qaData.forEach(item => {
+                const tagBtn = document.createElement('button');
+                tagBtn.className = 'recommend-tag';
+                tagBtn.textContent = item.question.length > 15 ? item.question.substring(0, 15) + '...' : item.question;
+                tagBtn.dataset.question = item.question;
+                // 点击推荐问题自动填充并回答
+                tagBtn.addEventListener('click', () => {
+                    questionInput.value = item.question;
+                    handleQuestion();
+                });
+                recommendTags.appendChild(tagBtn);
             });
-            
-            // 常见问题折叠功能
-            const faqQuestions = document.querySelectorAll('.faq-question');
-            faqQuestions.forEach(question => {
-                question.addEventListener('click', function() {
-                    const answer = this.nextElementSibling;
-                    const icon = this.querySelector('i');
-                    
-                    // 切换显示/隐藏
-                    answer.classList.toggle('hidden');
-                    
-                    // 旋转图标
-                    if (answer.classList.contains('hidden')) {
-                        icon.style.transform = 'rotate(0deg)';
-                    } else {
-                        icon.style.transform = 'rotate(180deg)';
+        }
+
+        // 模糊匹配算法（核心搜索逻辑）
+        function fuzzyMatch(userQuestion) {
+            // 清洗用户输入（去除特殊字符，转小写）
+            const cleanUserQ = userQuestion.toLowerCase().replace(/[^\u4e00-\u9fa5a-zA-Z0-9]/g, '');
+            let bestMatch = null;
+            let maxScore = 0;
+
+            qaData.forEach(item => {
+                let score = 0;
+                // 1. 关键词匹配得分（权重更高）
+                item.keywords.forEach(keyword => {
+                    if (cleanUserQ.includes(keyword.toLowerCase())) {
+                        score += 2;
                     }
                 });
-            });
-            
-            // 企业名单弹窗
-            const showCompaniesBtn = document.getElementById('showCompaniesBtn');
-            const companiesModal = document.getElementById('companiesModal');
-            const closeCompaniesBtn = document.getElementById('closeCompaniesBtn');
-            
-            showCompaniesBtn.addEventListener('click', function() {
-                companiesModal.classList.remove('hidden');
-            });
-            
-            closeCompaniesBtn.addEventListener('click', function() {
-                companiesModal.classList.add('hidden');
-            });
-            
-            // 帮助弹窗
-            const helpBtn = document.getElementById('helpBtn');
-            const helpModal = document.getElementById('helpModal');
-            const closeHelpBtn = document.getElementById('closeHelpBtn');
-            const closeHelpBtn2 = document.getElementById('closeHelpBtn2');
-            
-            helpBtn.addEventListener('click', function() {
-                helpModal.classList.remove('hidden');
-            });
-            
-            closeHelpBtn.addEventListener('click', function() {
-                helpModal.classList.add('hidden');
-            });
-            
-            closeHelpBtn2.addEventListener('click', function() {
-                helpModal.classList.add('hidden');
-            });
-            
-            // 点击弹窗外部关闭弹窗
-            window.addEventListener('click', function(e) {
-                if (e.target === companiesModal) {
-                    companiesModal.classList.add('hidden');
+                // 2. 问题文本匹配得分
+                const cleanItemQ = item.question.toLowerCase().replace(/[^\u4e00-\u9fa5a-zA-Z0-9]/g, '');
+                if (cleanUserQ.includes(cleanItemQ)) {
+                    score += 3; // 完全包含问题，得分最高
+                } else if (cleanItemQ.includes(cleanUserQ)) {
+                    score += 1; // 问题包含输入，得分较低
                 }
-                if (e.target === helpModal) {
-                    helpModal.classList.add('hidden');
+
+                // 更新最佳匹配
+                if (score > maxScore) {
+                    maxScore = score;
+                    bestMatch = item;
                 }
             });
+
+            return maxScore > 0 ? bestMatch : null;
+        }
+
+        // 处理问答逻辑
+        function handleQuestion() {
+            let question = questionInput.value.trim();
+            if (!question) {
+                answerBox.textContent = "💡 您可以点击下方的热门问题快速提问，或输入您想咨询的问题~";
+                return;
+            }
+
+            // 执行模糊匹配
+            const matchedItem = fuzzyMatch(question);
+            let answer;
+            if (matchedItem) {
+                answer = matchedItem.answer;
+            } else {
+                answer = "抱歉，我暂时无法解答这个问题，您可以参考以下人工咨询方式：\n1. 云闪付领券问题：咨询购车汽车门店\n2. 淘宝购物问题：咨询淘宝客服 15858250755；也可加入微信答疑群（扫码即可）";
+            }
+
+            answerBox.textContent = answer;
+            questionInput.value = '';
+        }
+
+        // 二维码弹窗控制
+        function openModal() {
+            qrcodeModal.style.display = 'flex';
+        }
+        function closeModal() {
+            qrcodeModal.style.display = 'none';
+        }
+
+        // 绑定所有事件
+        // 1. 提问按钮点击
+        submitBtn.addEventListener('click', handleQuestion);
+        // 2. 回车提交问题
+        questionInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleQuestion();
         });
+        // 3. 二维码交互
+        qrcodeImg.addEventListener('click', openModal);
+        closeBtn.addEventListener('click', closeModal);
+        // 4. 点击弹窗空白处关闭
+        window.addEventListener('click', (e) => {
+            if (e.target === qrcodeModal) closeModal();
+        });
+        // 5. 页面加载时初始化推荐问题
+        window.addEventListener('load', initRecommendTags);
     </script>
 </body>
 </html>
