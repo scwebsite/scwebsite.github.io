@@ -394,7 +394,11 @@
     <script>
         // 问答语料库（完整保留模糊搜索逻辑）
         const qaData = [
-           
+            {
+                keywords: ["消费券无法使用", "券用不了", "消费券不能用", "无法使用消费券"],
+                question: "消费券无法使用",
+                answer: "第一步：去云闪付检查资格是否下方（打开云闪付app-我的—优惠券）\n第二步：打开手机淘宝—搜索汽车商超消费券—点进进入第一个—激活资格—返回会场去购买商品\n注意：购买商品时需要点击确认付款，到下图所示页面即会显示云闪付优惠信息\n\n<div style='margin-top: 15px; text-align: center;'><img src='https://i.postimg.cc/tRLzNjvk/add1.jpg' alt='云闪付优惠信息显示页面' style='max-width: 60%; height: auto; border: 2px solid #2d9969; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);'></div>"
+            },
             {
                 keywords: ["申领条件", "申请要求", "资格", "谁能领", "领取条件"],
                 question: "上城区汽车消费券申领需要什么条件",
@@ -522,7 +526,7 @@
         // 初始化推荐问题标签（智能推荐核心）
         function initRecommendTags() {
             // 指定要显示的标签
-            const allowedTags = ["使用门槛", "可用店铺", "可用商品少", "品类少", "有效期"];
+            const allowedTags = ["消费券无法使用", "使用门槛", "可用店铺", "可用商品少", "品类少", "有效期"];
             
             qaData.forEach(item => {
                 // 每个问题只取第一个关键词创建标签
@@ -595,7 +599,12 @@
                 answer = "抱歉，我暂时无法解答这个问题，您可以参考以下人工咨询方式：\n1. 云闪付领券问题：咨询购车汽车门店\n2. 淘宝购物问题：咨询淘宝客服 15858250755；也可加入微信答疑群（扫码即可）";
             }
 
-            answerBox.textContent = answer;
+            // 检查答案是否包含HTML内容，如果包含则使用innerHTML
+            if (answer.includes('<img') || answer.includes('<div')) {
+                answerBox.innerHTML = answer;
+            } else {
+                answerBox.textContent = answer;
+            }
             questionInput.value = '';
         }
 
